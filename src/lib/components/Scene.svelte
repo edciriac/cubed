@@ -1,5 +1,7 @@
 <script>
 	import { T, useFrame, useTask } from '@threlte/core';
+  import { interactivity } from '@threlte/extras'
+  interactivity()
 
 	let posY = 0;
 	let posX = 0;
@@ -16,7 +18,22 @@
 	tick();
 </script>
 
-  <T.Mesh position.y={posY} position.x={posX} rotation.y={rotY} rotation.x={rotX}>
+  <T.Mesh position.y={posY} position.x={posX} rotation.y={rotY} rotation.x={rotX}
+
+  on:pointerenter={() =>
+  {
+	cancelAnimationFrame(handle);
+}
+  }
+
+  on:pointerleave={() =>
+  {
+	tick();
+  }
+  }
+  >
+  
+  >
     <T.BoxGeometry />
     <T.MeshStandardMaterial color="#0059BA" />
   </T.Mesh>
