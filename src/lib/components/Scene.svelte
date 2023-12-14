@@ -1,21 +1,21 @@
 <script>
-	import { T, useFrame, useTask } from '@threlte/core';
-  import { interactivity } from '@threlte/extras'
-  import { spring, tweened } from "svelte/motion";
-  interactivity()
-	let scale = spring(1)
-	let rotate = tweened(0)
+	import { T } from '@threlte/core';
+	import { interactivity } from '@threlte/extras';
+	import { spring, tweened } from 'svelte/motion';
+	interactivity();
+	let scale = spring(1);
+	let rotate = tweened(0);
 	let posY = tweened(1);
 	let rotY = rotate;
 	let rotZ = rotate;
 	let rotX = rotate;
-	let speed = 900
+	let speed = 900;
 	/**
 	 * @type {number}
 	 */
 	let handle;
 	const tick = () => {
-		posY.set(Math.sin(Date.now() / speed) * 0.05 + 1)
+		posY.set(Math.sin(Date.now() / speed) * 0.05 + 1);
 		rotY.set(Math.sin(Date.now() / speed + 200) * 0.1);
 		rotX.set(Math.sin(Date.now() / speed - 100) * 0.1);
 		rotZ.set(Math.sin(Date.now() / speed + 100) * 0.1);
@@ -24,29 +24,28 @@
 	tick();
 </script>
 
-  <T.Mesh position.y={$posY}  rotation.y={$rotY} rotation.x={$rotX} rotation.z={$rotZ} scale = {$scale}
-
-  on:pointerenter={() =>
-  {
-	rotY.set(0);
-	rotX.set(0);
-	rotZ.set(0);
-	posY.set(1);
-	scale.set(1.3);
-	cancelAnimationFrame(handle);
-}
-  }
-
-  on:pointerleave={() =>
-  {
-	scale.set(1);
-	tick();
-  }
-  }
-  >
-    <T.BoxGeometry />
-    <T.MeshStandardMaterial color="#0059BA" />
-  </T.Mesh>
+<T.Mesh
+	position.y={$posY}
+	rotation.y={$rotY}
+	rotation.x={$rotX}
+	rotation.z={$rotZ}
+	scale={$scale}
+	on:pointerenter={() => {
+		rotY.set(0);
+		rotX.set(0);
+		rotZ.set(0);
+		posY.set(1);
+		scale.set(1.3);
+		cancelAnimationFrame(handle);
+	}}
+	on:pointerleave={() => {
+		scale.set(1);
+		tick();
+	}}
+>
+	<T.BoxGeometry />
+	<T.MeshStandardMaterial color="#0059BA" />
+</T.Mesh>
 <T.Group>
 	<T.PerspectiveCamera
 		makeDefault
