@@ -26,9 +26,7 @@
 
 <T.Mesh
 	position.y={$posY}
-	rotation.y={$rotY}
-	rotation.x={$rotX}
-	rotation.z={$rotZ}
+	rotation={[$rotY, $rotX, $rotZ]}
 	scale={$scale}
 	on:pointerenter={() => {
 		rotY.set(0);

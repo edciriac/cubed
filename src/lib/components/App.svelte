@@ -1,8 +1,24 @@
 <script>
-  import { Canvas } from '@threlte/core'
-  import Scene from './Scene.svelte'
+	import { Canvas } from '@threlte/core';
+	import Scene from './Scene.svelte';
 </script>
 
-<Canvas>
-  <Scene />
-</Canvas>
+<div>
+	<Canvas>
+		<Scene />
+	</Canvas>
+</div>
+
+<div>
+	<Canvas>
+		<Scene />
+	</Canvas>
+</div>
+
+<div>
+	<Canvas>
+		<Scene />
+	</Canvas>
+</div>
+
+
