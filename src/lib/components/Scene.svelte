@@ -6,19 +6,22 @@
 	let posY = 0;
 	let posX = 0;
 	let rotY = 0;
+	let rotZ = 0;
 	let rotX = 0;
+	let speed = 900
 	let handle;
 	const tick = () => {
-		posY = Math.sin(Date.now() / 900) * 0.05 + 1;
+		posY = Math.sin(Date.now() / speed) * 0.05 + 1;
 		// posX = Math.cos(Date.now() / 1500) * 0.025;
-		rotY = Math.sin(Date.now() / 1100) * 0.1;
-		rotX = Math.sin(Date.now() / 900) * 0.1;
+		rotY = Math.sin(Date.now() / speed + 200) * 0.1;
+		rotX = Math.sin(Date.now() / speed) * 0.1;
+		rotZ = Math.sin(Date.now() / speed) * 0.1 ;
 		handle = window.requestAnimationFrame(tick);
 	};
 	tick();
 </script>
 
-  <T.Mesh position.y={posY} position.x={posX} rotation.y={rotY} rotation.x={rotX}
+  <T.Mesh position.y={posY} position.x={posX} rotation.y={rotY} rotation.x={rotX} rotation.z={rotZ}
 
   on:pointerenter={() =>
   {
@@ -33,14 +36,14 @@
   }
   >
   
-  >
+  
     <T.BoxGeometry />
     <T.MeshStandardMaterial color="#0059BA" />
   </T.Mesh>
 <T.Group>
 	<T.PerspectiveCamera
 		makeDefault
-		position={[-10, 2.5, 1]}
+		position={[-10, 1.5, 1]}
 		fov={15}
 		on:create={({ ref }) => {
 			ref.lookAt(0, 1, 0);
