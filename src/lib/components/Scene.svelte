@@ -3,9 +3,9 @@
   import { interactivity } from '@threlte/extras'
   import { spring, tweened } from "svelte/motion";
   interactivity()
+	let scale = spring(1)
 	let rotate = tweened(0)
 	let posY = tweened(1);
-	let posX = 0;
 	let rotY = rotate;
 	let rotZ = rotate;
 	let rotX = rotate;
@@ -16,16 +16,15 @@
 	let handle;
 	const tick = () => {
 		posY.set(Math.sin(Date.now() / speed) * 0.05 + 1)
-		// posX = Math.cos(Date.now() / 1500) * 0.025;
 		rotY.set(Math.sin(Date.now() / speed + 200) * 0.1);
-		rotX.set(Math.sin(Date.now() / speed) * 0.1);
-		rotZ.set(Math.sin(Date.now() / speed) * 0.1);
+		rotX.set(Math.sin(Date.now() / speed - 100) * 0.1);
+		rotZ.set(Math.sin(Date.now() / speed + 100) * 0.1);
 		handle = window.requestAnimationFrame(tick);
 	};
 	tick();
 </script>
 
-  <T.Mesh position.y={$posY} position.x={posX} rotation.y={$rotY} rotation.x={$rotX} rotation.z={$rotZ}
+  <T.Mesh position.y={$posY}  rotation.y={$rotY} rotation.x={$rotX} rotation.z={$rotZ} scale = {$scale}
 
   on:pointerenter={() =>
   {
@@ -33,12 +32,14 @@
 	rotX.set(0);
 	rotZ.set(0);
 	posY.set(1);
+	scale.set(1.3);
 	cancelAnimationFrame(handle);
 }
   }
 
   on:pointerleave={() =>
   {
+	scale.set(1);
 	tick();
   }
   }
