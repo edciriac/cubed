@@ -44,8 +44,8 @@
 >
 	<T.BoxGeometry />
 	<T.MeshStandardMaterial color="#0059BA" />
-	<HTML>
-		<div class="test"><p>hello there</p></div>
+	<HTML transform rotation={[0, -1.5, 0]} >
+		<div class="test"><p>hello there asfas fas fa sfas </p></div>
 	</HTML>
 </T.Mesh>
 <T.Group >
