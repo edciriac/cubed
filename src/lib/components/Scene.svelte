@@ -23,29 +23,36 @@
 		handle = window.requestAnimationFrame(tick);
 	};
 	tick();
-</script>
 
-<T.Mesh
-	position.y={$posY}
-	rotation={[$rotY, $rotX, $rotZ]}
-	scale={$scale}
-	on:pointerenter={() => {
+	let handleHover = () => {	
 		rotY.set(0);
 		rotX.set(0);
 		rotZ.set(0);
 		posY.set(1);
 		scale.set(1.3);
 		cancelAnimationFrame(handle);
-	}}
-	on:pointerleave={() => {
+	}
+
+	let handleUnhover = () => {
 		scale.set(1);
 		tick();
-	}}
+	};
+	
+</script>
+
+<T.Mesh
+	position.y={$posY}
+	rotation={[$rotY, $rotX, $rotZ]}
+	scale={$scale}
+	on:pointerenter={handleHover}
+	on:pointerleave= {handleUnhover}
 >
 	<T.BoxGeometry />
 	<T.MeshStandardMaterial color="#0059BA" />
-	<HTML transform rotation={[0, -1.5, 0]} >
-		<div class="test"><p>hello there asfas fas fa sfas </p></div>
+	<HTML transform rotation={[0, -1.5, 0]} 
+	>
+		<div class="test" on:pointerenter={handleHover}
+		on:pointerleave={handleUnhover}><p>hello there asfas fas fa sfas </p></div>
 	</HTML>
 </T.Mesh>
 <T.Group >
@@ -64,14 +71,14 @@
 
 <style>
 	.test{
-		position: absolute;
-		width: 100%;
+		/* width: 100%;
+		min-width: 200px;
 		height: 100%;
 		background-color: rgba(0,0,0,0.3);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		color: white;
-		pointer-events: none;
+		color: white; */
+	}
+	p{
+		padding: 0;
+		margin: 0;
 	}
 </style>
