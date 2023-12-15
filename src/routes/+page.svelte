@@ -14,7 +14,7 @@
   div {
     width: 100vw;
     height: 100vh;
-    background: rgb(13, 19, 32);
-    background: linear-gradient(180deg, rgba(13, 19, 32, 1) 0%, rgba(8, 12, 21, 1) 100%);
+    background: rgb(113, 149, 227);
+    background: linear-gradient(180deg, rgb(126, 157, 223) 0%, rgb(59, 77, 118) 100%);
   }
 </style>

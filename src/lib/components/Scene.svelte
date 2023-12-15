@@ -2,6 +2,7 @@
 	import { T } from '@threlte/core';
 	import { interactivity } from '@threlte/extras';
 	import { spring, tweened } from 'svelte/motion';
+	import { HTML } from '@threlte/extras'
 	interactivity();
 	let scale = spring(1);
 	let rotate = tweened(0);
@@ -43,8 +44,11 @@
 >
 	<T.BoxGeometry />
 	<T.MeshStandardMaterial color="#0059BA" />
+	<HTML>
+		<div class="test"><p>hello there</p></div>
+	</HTML>
 </T.Mesh>
-<T.Group>
+<T.Group >
 	<T.PerspectiveCamera
 		makeDefault
 		position={[-10, 1.5, 1]}
@@ -57,3 +61,17 @@
 
 <T.DirectionalLight intensity={0.8} position.x={5} position.y={10} />
 <T.AmbientLight intensity={0.2} />
+
+<style>
+	.test{
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0,0,0,0.3);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: white;
+		pointer-events: none;
+	}
+</style>
