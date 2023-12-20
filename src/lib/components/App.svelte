@@ -7,7 +7,11 @@
 	<div>
 	
 		<Canvas >
-			<Scene />
+			<Scene content={`<p>hello there!</p>
+				<span>I'm a span</span>
+				<div>
+					<p>kjöafnsdfjlkö</p>
+				</div>`}/>
 		</Canvas>
 	</div>
 	
@@ -17,11 +21,7 @@
 		</Canvas>
 	</div>
 	
-	<div>
-		<Canvas>
-			<Scene />
-		</Canvas>
-	</div>
+	
 </div>
 
 <style>

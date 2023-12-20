@@ -11,6 +11,24 @@
 	let rotZ = rotate;
 	let rotX = rotate;
 	let speed = 900;
+
+	export let content = 
+	`
+	<article on:pointerenter={handleHover}
+			on:pointerleave={handleUnhover}>
+				<ul>
+					<li>
+						<a href="https://github.com/edciriac/edciriac-Proyecto-BD-2022">
+							Python Web Scraper project (Spanish)
+						</a>
+						<ul>
+							<li> A Web Scraper project which we did in Chile (unfortunately documentation in spanish and not in english). In short, a script that goes through selected Chilean newspapers sites and extracts some info and stores them in a SQL database.</li>
+						</ul>
+					</li>
+				</ul>
+			</article>
+	`
+	
 	/**
 	 * @type {number}
 	 */
@@ -49,10 +67,16 @@
 >
 	<T.BoxGeometry />
 	<T.MeshStandardMaterial color="#0059BA" />
-	<HTML transform rotation={[0, -1.5, 0]} 
+	<HTML center rotation={[0, -1.5, 0]} 
 	>
-		<div class="test" on:pointerenter={handleHover}
-		on:pointerleave={handleUnhover}><p>hello there asfas fas fa sfas </p></div>
+		<!-- <div class="test" on:pointerenter={handleHover}
+		on:pointerleave={handleUnhover}><p>hello there asfas fas fa sfas </p></div> -->
+
+		<div class="container" on:pointerenter={handleHover}
+		on:pointerleave={handleUnhover}>
+			{@html content}
+	
+		</div>
 	</HTML>
 </T.Mesh>
 <T.Group >
@@ -70,12 +94,20 @@
 <T.AmbientLight intensity={0.2} />
 
 <style>
-	.test{
-		/* width: 100%;
-		min-width: 200px;
-		height: 100%;
-		background-color: rgba(0,0,0,0.3);
-		color: white; */
+	.container{
+		background-color: rgba(240, 248, 255, 0.609);
+		min-width: 50vw;
+		padding: 0 0.5em;
+		border-radius: 5px;
+	}
+	:global(article ul){
+		padding: 0.5em 1em;
+	}
+	:global(article li){
+		padding: 0;
+		margin: 0;
+		list-style: circle;
+		color: black;
 	}
 	p{
 		padding: 0;
