@@ -12,6 +12,8 @@
 	let rotX = rotate;
 	let speed = 900;
 
+	let expanded = false
+	
 	export let content = 
 	`
 	<article on:pointerenter={handleHover}
@@ -56,6 +58,25 @@
 		tick();
 	};
 	
+	let handleClick = (event) => { 
+		let parent = event.target? event.target.parentElement : event.nativeEvent.target.parentElement
+		console.log(parent)
+		console.log(parent.parentElement.parentElement)
+		if (!parent.classList.contains("canv")) {
+			parent = parent.parentElement.parentElement
+		}
+		if(expanded){
+			parent.style.height = "50vh"
+			parent.style.top = "0vh"
+		} else {
+			parent.style.position = "absolute"
+			parent.style.height = "100vh"
+			parent.style.top = "50vh"
+			
+		}
+		expanded = expanded ? false : true
+	};
+	
 </script>
 
 <T.Mesh
@@ -64,6 +85,7 @@
 	scale={$scale}
 	on:pointerenter={handleHover}
 	on:pointerleave= {handleUnhover}
+	on:click={handleClick}
 >
 	<T.BoxGeometry />
 	<T.MeshStandardMaterial color="#0059BA" />
@@ -73,7 +95,9 @@
 		on:pointerleave={handleUnhover}><p>hello there asfas fas fa sfas </p></div> -->
 
 		<div class="container" on:pointerenter={handleHover}
-		on:pointerleave={handleUnhover}>
+		on:pointerleave={handleUnhover}
+		on:click={handleClick}
+		>
 			{@html content}
 	
 		</div>
@@ -97,9 +121,15 @@
 	.container{
 		background-color: rgba(240, 248, 255, 0.609);
 		min-width: 50vw;
-		padding: 0 0.5em;
+		padding: 0.5em 0.5em;
 		border-radius: 5px;
 	}
+
+	:global(.container *){
+		color: black;
+		pointer-events: none;
+	}
+	
 	:global(article ul){
 		padding: 0.5em 1em;
 	}
@@ -109,7 +139,7 @@
 		list-style: circle;
 		color: black;
 	}
-	p{
+	:global( p){
 		padding: 0;
 		margin: 0;
 	}
