@@ -78,7 +78,7 @@
 </div>
 
 <div id="showbox">
-	<div class="canv" style="height: 50vh; border-style: dotted;border-color: aqua; border-width: 2px;">
+	<div class="canv" >
 		<Canvas>
 			<Scene content={contentToShow} />
 		</Canvas>
@@ -93,19 +93,15 @@ div{
 	color: white;
 }
 #showbox{
-	position: absolute;
-	top: 12.5vh;
-	left: 12.5vw;
-	height: 75vh;
-	width: 75vw;
-	opacity : 0.7;
-	background: rosybrown;
-	border: 1px solid black;
+	position: sticky;
+	height: 100vh;
+	width: 100vw;
+	opacity : 1;
 	margin: auto;
 }		
 #showbox>div {
-        width: 100%;
-        height: 100%;
+        width: 100% ;
+        height: 100% ;
     }
 
 .wrap{

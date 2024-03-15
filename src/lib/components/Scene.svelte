@@ -12,17 +12,8 @@
 	let rotY = rotate;
 	let rotZ = rotate;
 	let rotX = rotate;
-	let speed = 900;
+	export let speed = RandomNumberBetween(800, 1100);
 	export let contentToShow = ""
-	// export let showboxbind
-	// let wrapper
-	// const goToShowbox = () => {
-	//     showboxbind.classList.remove("hide");
-	// 	console.log(wrapper)
-	// 	showboxbind.appendChild(wrapper);
-		
-	// }
-	
 	let expanded = false
 	export let content = 
 	`
@@ -45,6 +36,15 @@
 		contentToShow = content
 		dispatch('click', {})
 	}
+	
+	/**
+	 * @param {number} min
+	 * @param {number} max
+	 */
+	function RandomNumberBetween(min, max) {
+  		return Math.random() * (max - min) + min;
+	}
+
 	
 	/**
 	 * @type {number}
@@ -73,7 +73,7 @@
 		tick();
 	};
 	
-	let handleClick = (event) => { 
+	let handleClick = (/** @type {{ target: { parentElement: any; }; nativeEvent: { target: { parentElement: any; }; }; }} */ event) => { 
 		let parent = event.target? event.target.parentElement : event.nativeEvent.target.parentElement
 		console.log(parent)
 		console.log(parent.parentElement.parentElement)
@@ -108,7 +108,7 @@
 	on:click={dispatchClick}
 >
 	<T.BoxGeometry />
-	<T.MeshStandardMaterial color="#0059BA" />
+	<T.MeshStandardMaterial color="rgb(18, 176, 187);" />
 	<HTML center rotation={[0, -1.5, 0]} 
 	>
 		<!-- <div class="test" on:pointerenter={handleHover}
@@ -142,7 +142,7 @@
 	:global(.expanded) {
 		/* width: 50%; */
 		min-height: 100vh;
-		position: absolute;
+		position: sticky;
 		top: 0;
 	}
 	
