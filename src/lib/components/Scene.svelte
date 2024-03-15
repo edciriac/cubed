@@ -1,8 +1,10 @@
 <script>
+	// TODO: Add randomness to inital values
 	import { T } from '@threlte/core';
 	import { interactivity } from '@threlte/extras';
 	import { spring, tweened } from 'svelte/motion';
 	import { HTML } from '@threlte/extras'
+	import { createEventDispatcher } from 'svelte';
 	interactivity();
 	let scale = spring(1);
 	let rotate = tweened(0);
@@ -11,9 +13,17 @@
 	let rotZ = rotate;
 	let rotX = rotate;
 	let speed = 900;
-
-	let expanded = false
+	export let contentToShow = ""
+	// export let showboxbind
+	// let wrapper
+	// const goToShowbox = () => {
+	//     showboxbind.classList.remove("hide");
+	// 	console.log(wrapper)
+	// 	showboxbind.appendChild(wrapper);
+		
+	// }
 	
+	let expanded = false
 	export let content = 
 	`
 	<article on:pointerenter={handleHover}
@@ -30,6 +40,11 @@
 				</ul>
 			</article>
 	`
+	const dispatch = createEventDispatcher();
+	function dispatchClick(){
+		contentToShow = content
+		dispatch('click', {})
+	}
 	
 	/**
 	 * @type {number}
@@ -62,19 +77,24 @@
 		let parent = event.target? event.target.parentElement : event.nativeEvent.target.parentElement
 		console.log(parent)
 		console.log(parent.parentElement.parentElement)
-		if (!parent.classList.contains("canv")) {
-			parent = parent.parentElement.parentElement
-		}
-		if(expanded){
-			parent.style.height = "50vh"
-			parent.style.top = "0vh"
-		} else {
-			parent.style.position = "absolute"
-			parent.style.height = "100vh"
-			parent.style.top = "50vh"
+		// if (!parent.classList.contains("canv")) {
+		// 	parent = parent.parentElement.parentElement
+		// }
+		// if(!expanded){
+		// 	parent.classList.add('expanded');
+		// 	// parent.style.position = "sticky"
+		// 	// parent.style.height = "50vh"
+		// 	// parent.style.top = "0vh"
+		// } else {
+		// 	parent.classList.remove('expanded');
+		// 	// parent.style.position = "sticky"
+		// 	// parent.style.height = "100vh"
+		// 	// parent.style.top = "50vh"
 			
-		}
-		expanded = expanded ? false : true
+		// }
+		// console.log(expanded)
+		// expanded = expanded ? false : true
+		// console.log(expanded)
 	};
 	
 </script>
@@ -85,7 +105,7 @@
 	scale={$scale}
 	on:pointerenter={handleHover}
 	on:pointerleave= {handleUnhover}
-	on:click={handleClick}
+	on:click={dispatchClick}
 >
 	<T.BoxGeometry />
 	<T.MeshStandardMaterial color="#0059BA" />
@@ -96,7 +116,7 @@
 
 		<div class="container" on:pointerenter={handleHover}
 		on:pointerleave={handleUnhover}
-		on:click={handleClick}
+		on:click={dispatchClick}
 		>
 			{@html content}
 	
@@ -117,7 +137,15 @@
 <T.DirectionalLight intensity={0.8} position.x={5} position.y={10} />
 <T.AmbientLight intensity={0.2} />
 
+
 <style>
+	:global(.expanded) {
+		/* width: 50%; */
+		min-height: 100vh;
+		position: absolute;
+		top: 0;
+	}
+	
 	.container{
 		background-color: rgba(240, 248, 255, 0.609);
 		min-width: 50vw;
